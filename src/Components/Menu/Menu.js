@@ -1,22 +1,43 @@
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 function Menu() {
     return (
         <>
             <h2>Menu</h2>
             <ul>
-                <li>
-                    <Link to="/">Home</Link>
-                </li>
-                <li>
-                    <Link to="/Blog">Blog</Link>
-                </li>
-                <li>
-                    <Link to="/Profile">Profile</Link>
-                </li>
+                {routes.map(route => (
+                    <li key={route.to}>
+                        <NavLink
+                            style={({ isActive }) => styles(isActive)}
+                            to={route.to}
+                        >
+                            {route.text}
+                        </NavLink>
+                    </li>
+                ))}
             </ul>
         </>
     )
 }
+const styles = active => {
+    if (active) {
+        return { color: 'white', backgroundColor: 'green' }
+    } else {
+        return { color: 'blue' }
+    }
+}
+const routes = []
+routes.push({
+    to: '/',
+    text: 'Home',
+})
+routes.push({
+    to: '/Blog',
+    text: 'Blog',
+})
+routes.push({
+    to: '/Profile',
+    text: 'Profile',
+})
 
 export { Menu }
