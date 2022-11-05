@@ -1,29 +1,21 @@
-import { NavLink } from 'react-router-dom'
-import { blogData } from '../BlogData/BlogData'
+import { BlogPreview } from './BlogPreview'
 
 function Blog() {
+    const created = 'official'
     return (
         <>
-            <h1>Blog</h1>
+            <h1>{created} Blog</h1>
             <p>
                 Welcome to our blog. here you can find some posts form your
                 interest
             </p>
-            <ul>
+            {/* <ul>
                 {blogData.map(post => (
                     <BlogCard post={post} key={post.slug} />
                 ))}
-            </ul>
+            </ul> */}
+            <BlogPreview created={created} />
         </>
-    )
-}
-
-function BlogCard({ post }) {
-    return (
-        <li>
-            <NavLink to={post.slug}>{post.tittle}</NavLink>
-            <p>{post.author}</p>
-        </li>
     )
 }
 
