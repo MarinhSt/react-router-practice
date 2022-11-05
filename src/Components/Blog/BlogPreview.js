@@ -1,3 +1,4 @@
+import { Outlet } from 'react-router-dom'
 import { blogData } from '../BlogData/BlogData'
 import { BlogCard } from './BlogCard'
 
@@ -6,6 +7,7 @@ function BlogPreview({ created }) {
         <>
             <h3>other post created by {created}</h3>
             <ul>
+                <Outlet />
                 {blogData.map(post => (
                     <BlogCard post={post} key={post.slug} />
                 ))}

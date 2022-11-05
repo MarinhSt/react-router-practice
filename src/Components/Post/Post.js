@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from 'react-router-dom'
+import { NavLink, useNavigate, useParams } from 'react-router-dom'
 import { blogData } from '../BlogData/BlogData'
 
 function Post() {
@@ -13,6 +13,15 @@ function Post() {
             <p>{text}</p>
             <p>{author}</p>
             <button onClick={goBack}>Go Back button</button>
+            <br />
+            <NavLink
+                style={({ isActive }) => ({
+                    display: isActive ? 'none' : 'block',
+                })}
+                to="/Preview"
+            >
+                See other posts
+            </NavLink>
         </>
     )
 }
