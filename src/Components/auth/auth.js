@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Navigate, useNavigate } from 'react-router-dom'
 
 const authContext = React.createContext()
 function AuthProvider({ children }) {
@@ -29,4 +29,23 @@ function useAuth(params) {
     return auth
 }
 
-export { AuthProvider, useAuth }
+const PrivateRoute = ({ children }) => {
+    const { user } = useAuth()
+
+    if (children.props.hide && user) {
+        console.log(children.props.hide)
+        return <Navigate to="/" />
+    }
+
+    if (!user && !children.props.hide) {
+        return <Navigate to="/Login" />
+    }
+    return children
+
+    // const { user } = useAuth()
+    // if (route.private && !user) return null
+    // console.log(children)
+    // return children.children
+}
+
+export { AuthProvider, useAuth, PrivateRoute }

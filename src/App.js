@@ -1,6 +1,6 @@
 // import './App.css'
 import { HashRouter, Route, Routes } from 'react-router-dom'
-import { AuthProvider } from './Components/auth/auth'
+import { AuthProvider, PrivateRoute } from './Components/auth/auth'
 import { Blog } from './Components/Blog/Blog'
 import { BlogPreview } from './Components/Blog/BlogPreview'
 import { Footer } from './Components/Footer/Footer'
@@ -20,14 +20,35 @@ function App() {
                     <Menu />
                     <Routes>
                         <Route path="/" element={<Home />} />
-                        <Route path="/Login" element={<Login />} />
-                        <Route path="/Logout" element={<Logout />} />
+                        <Route
+                            path="/Login"
+                            element={
+                                <PrivateRoute>
+                                    <Login hide={true} />
+                                </PrivateRoute>
+                            }
+                        />
+                        <Route
+                            path="/Logout"
+                            element={
+                                <PrivateRoute>
+                                    <Logout />
+                                </PrivateRoute>
+                            }
+                        />
                         <Route path="/Blog" element={<Blog />} />
                         <Route path="/Blog/:slug" element={<Post />} />
                         <Route path="/preview" element={<BlogPreview />}>
                             <Route path=":slug" element={<Post />} />
                         </Route>
-                        <Route path="/Profile" element={<Profile />} />
+                        <Route
+                            path="/Profile"
+                            element={
+                                <PrivateRoute>
+                                    <Profile />
+                                </PrivateRoute>
+                            }
+                        />
                         <Route path="*" element={<NotFound />} />
                     </Routes>
                     <Footer />
