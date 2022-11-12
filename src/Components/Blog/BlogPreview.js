@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom'
-import { blogData } from '../BlogData/BlogData'
+import { blogData } from '../Data/BlogData'
 import { BlogCard } from './BlogCard'
 
 function BlogPreview({ created }) {

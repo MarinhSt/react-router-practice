@@ -1,5 +1,5 @@
 import { NavLink, useNavigate, useParams } from 'react-router-dom'
-import { blogData } from '../BlogData/BlogData'
+import { blogData } from '../Data/BlogData'
 
 function Post() {
     const { slug } = useParams()
