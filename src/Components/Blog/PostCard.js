@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom'
 
-function BlogCard({ post }) {
+function PostCard({ post }) {
     return (
         <li>
             <NavLink
@@ -16,4 +16,4 @@ function BlogCard({ post }) {
     )
 }
 
-export { BlogCard }
+export { PostCard }

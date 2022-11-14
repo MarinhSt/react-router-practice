@@ -1,11 +1,19 @@
 import React, { useContext, useState } from 'react'
 import { Navigate, useNavigate } from 'react-router-dom'
+import { blogData } from '../Data/BlogData'
 
 const authContext = React.createContext()
 function AuthProvider({ children }) {
     const [user, setUser] = useState(null)
+    const [actualPost, setActualPost] = useState()
     const navigate = useNavigate()
 
+    const edit = change => {
+        setActualPost(change)
+    }
+    const saveChanges = change => {
+        navigate(-1)
+    }
     const logout = () => {
         setUser(null)
         navigate('/')
@@ -20,6 +28,9 @@ function AuthProvider({ children }) {
         user,
         login,
         logout,
+        edit,
+        saveChanges,
+        actualPost,
     }
     return <authContext.Provider value={auth}>{children}</authContext.Provider>
 }

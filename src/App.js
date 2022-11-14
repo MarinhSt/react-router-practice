@@ -2,13 +2,14 @@
 import { HashRouter, Route, Routes } from 'react-router-dom'
 import { AuthProvider, PrivateRoute } from './Components/auth/auth'
 import { Blog } from './Components/Blog/Blog'
-import { BlogPreview } from './Components/Blog/BlogPreview'
+import { PostsPreview } from './Components/Blog/PostsPreview'
 import { Footer } from './Components/Footer/Footer'
 import { Home } from './Components/Home/Home'
 import { Login } from './Components/Login/Login'
 import { Logout } from './Components/Logout/Logout'
 import { Menu } from './Components/Menu/Menu'
 import { NotFound } from './Components/NotFound/NotFound'
+import { Editing } from './Components/Post/Editing'
 import { Post } from './Components/Post/Post'
 import { Profile } from './Components/Profile/Profile'
 
@@ -38,7 +39,15 @@ function App() {
                         />
                         <Route path="/Blog" element={<Blog />} />
                         <Route path="/Blog/:slug" element={<Post />} />
-                        <Route path="/preview" element={<BlogPreview />}>
+                        <Route
+                            path="/Editing"
+                            element={
+                                <PrivateRoute>
+                                    <Editing />
+                                </PrivateRoute>
+                            }
+                        />
+                        <Route path="/preview" element={<PostsPreview />}>
                             <Route path=":slug" element={<Post />} />
                         </Route>
                         <Route

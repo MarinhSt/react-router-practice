@@ -1,20 +1,15 @@
-import { BlogPreview } from './BlogPreview'
+import { PostsPreview } from './PostsPreview'
 
 function Blog() {
-    const created = 'official'
+    const created = 'Official team'
     return (
         <>
-            <h1>{created} Blog</h1>
+            <h1>{created} blog</h1>
             <p>
                 Welcome to our blog. here you can find some posts form your
                 interest
             </p>
-            {/* <ul>
-                {blogData.map(post => (
-                    <BlogCard post={post} key={post.slug} />
-                ))}
-            </ul> */}
-            <BlogPreview created={created} />
+            <PostsPreview created={created} />
         </>
     )
 }
