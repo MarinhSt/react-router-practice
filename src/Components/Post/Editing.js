@@ -1,26 +1,19 @@
 import { useState } from 'react'
 import { useAuth } from '../auth/auth'
-// import { blogData } from '../Data/BlogData'
 
 export function Editing() {
-    const { actualPost, saveChanges } = useAuth()
-    console.log({ props: actualPost })
+    const { actualPost, saveChanges, goBack } = useAuth()
 
     const [changes, setChanges] = useState(actualPost)
     const { tittle, text, author } = changes
-    // const info = { tittle: '', text: '', author: '' }
-    // const info = blogData.find(post => post.slug === slug)
-    const onSave = () => {
-        saveChanges(changes)
-        // console.log('onSave')
-        // console.log({ save: changes })
-        // blogData.find(
-        //     post => post.slug === changes.slug && (post = { ...changes })
-        // )
-        // console.log({ modify: blogData })
 
-        // return e.preventDefault
+    const onSave = e => {
+        saveChanges(changes)
+        e.preventDefault()
     }
+
+    //para poder realizar validacion si hay cambio, redirigir de una o preguntar si quiere cancelar y perder los cambios
+    const onCancel = () => goBack()
 
     return (
         <>
@@ -36,11 +29,12 @@ export function Editing() {
                 />
                 <br />
                 <label>Text</label>
-                <input
+                <textarea
                     style={{
                         width: '400px',
-                        height: 'fit-content',
+                        height: '200px',
                         padding: '10px',
+                        resize: 'none',
                     }}
                     type={'textarea'}
                     value={text}
@@ -57,6 +51,7 @@ export function Editing() {
                     }
                 />
                 <button type="submit">submit</button>
+                <button onClick={onCancel}>cancel</button>
             </form>
         </>
     )

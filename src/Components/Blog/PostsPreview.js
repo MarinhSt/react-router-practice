@@ -1,12 +1,13 @@
-import { blogData } from '../Data/BlogData'
+import { useAuth } from '../auth/auth'
 import { PostCard } from './PostCard'
 
 function PostsPreview({ created }) {
+    const { postList } = useAuth()
     return (
         <>
             <h3>Others post created by {created}</h3>
             <ul>
-                {blogData.map(post => (
+                {postList.map(post => (
                     <PostCard post={post} key={post.slug} />
                 ))}
             </ul>

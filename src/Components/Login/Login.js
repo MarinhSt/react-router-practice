@@ -7,8 +7,10 @@ function Login(params) {
     const { login } = useAuth()
     // const navigate = useNavigate()
     // const onLogin = e => console.log({ login: e, user: user })
-    const onLogin = () => login(userName)
-
+    const onLogin = e => {
+        login(userName)
+        e.preventDefault()
+    }
     return (
         <>
             <h1>Login</h1>

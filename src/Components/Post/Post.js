@@ -1,16 +1,19 @@
-import { useNavigate, useParams } from 'react-router-dom'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { useAuth } from '../auth/auth'
-import { blogData } from '../Data/BlogData'
+// import { blogData } from '../Data/BlogData'
 
 function Post() {
-    const { user, edit } = useAuth()
+    const { user, postList, edit, setFrom } = useAuth()
     const { slug } = useParams()
     const navigate = useNavigate()
-    const info = blogData.find(post => post.slug === slug)
+    const { pathname } = useLocation()
+    const info = postList.find(post => post.slug === slug)
     const { tittle, text, author } = info
     const goBack = () => navigate('/Blog')
     const goEdit = () => {
         edit({ slug, ...info })
+        setFrom(pathname)
+
         navigate('/Editing')
     }
     return (

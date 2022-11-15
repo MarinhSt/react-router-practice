@@ -5,14 +5,26 @@ import { blogData } from '../Data/BlogData'
 const authContext = React.createContext()
 function AuthProvider({ children }) {
     const [user, setUser] = useState(null)
+    const [postList, setPostList] = useState(blogData)
     const [actualPost, setActualPost] = useState()
+    const [from, setFrom] = useState()
     const navigate = useNavigate()
 
-    const edit = change => {
-        setActualPost(change)
+    const goBack = () => {
+        navigate(from)
     }
-    const saveChanges = change => {
-        navigate(-1)
+    const edit = post => {
+        setActualPost(post)
+    }
+    const saveChanges = postChanges => {
+        const updatePostList = postList.map(post => {
+            if (post.slug === postChanges.slug) return (post = postChanges)
+            else return post
+        })
+        console.log({ updatePostList })
+        setPostList(updatePostList)
+        // setActualPost(postChanges)
+        navigate(from)
     }
     const logout = () => {
         setUser(null)
@@ -31,11 +43,16 @@ function AuthProvider({ children }) {
         edit,
         saveChanges,
         actualPost,
+        postList,
+        setPostList,
+        from,
+        setFrom,
+        goBack,
     }
     return <authContext.Provider value={auth}>{children}</authContext.Provider>
 }
 
-function useAuth(params) {
+function useAuth() {
     const auth = useContext(authContext)
     return auth
 }
@@ -44,7 +61,6 @@ const PrivateRoute = ({ children }) => {
     const { user } = useAuth()
 
     if (children.props.hide && user) {
-        console.log(children.props.hide)
         return <Navigate to="/" />
     }
 
